@@ -1,12 +1,14 @@
 # A battey segment for Powerline
 
+If you don't know [Powerline](http://github.com/lokaltog/powerline) yet, go for it.
+
 ## Limitations
 
-* Works only on OSX. Tested on Mountain Lion only.
+* Works only on OSX. Tested on Mountain Lion only. _You tell me._
 
 ##Installation
 
-pip install -U --user git+https://github.com/xcambar/powerline-segment-battery.git
+    pip install -U --user git+https://github.com/xcambar/powerline-segment-battery.git
 
 And then add this to your prefered spot under `segments`:
 
@@ -15,6 +17,14 @@ And then add this to your prefered spot under `segments`:
         "name": "battery"
     },
 
+## Acknowledgements
+
+Thanks to @Lokaltog for Powerline.
+
+Thanks also to @omega for his demo of a custom Poserline segment. It would have tough
+(if even possible) without this example.
+
 ## License
 
 MIT
+
