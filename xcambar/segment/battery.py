@@ -26,5 +26,5 @@ def battery(pl, segment_info):
 
   return [{
     'contents': s,
-    'highlight_group': 'system_load'
+    'highlight_group': ['battery', 'system_load']
   }]
