@@ -18,7 +18,7 @@ def battery(pl, segment_info):
   percentage = re.search('(\d{0,3})%', p2.stdout.read()).group(1)
   nbr_full_hearts = int(min(threshold + int(percentage), 100) / int(100 / max_hearts))
 
-  full_heart = "♥"
+  full_heart = "♥ "
   empty_heart = "♡"
 
   s = ''.join([full_heart for num in xrange(nbr_full_hearts)])
