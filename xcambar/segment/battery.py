@@ -24,4 +24,7 @@ def battery(pl, segment_info):
   s = ''.join([full_heart for num in xrange(nbr_full_hearts)])
   s += ''.join([empty_heart for num in xrange(max_hearts - nbr_full_hearts)])
 
-  return s
+  return [{
+    'contents': s,
+    'highlight_group': 'system_load'
+  }]
