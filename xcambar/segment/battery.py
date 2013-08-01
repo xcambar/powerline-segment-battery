@@ -17,7 +17,7 @@ def display_symbol(value, config):
   nbr_full_symbols = int(min(threshold + int(value), 100) / int(100 / number_items))
 
   s = ''.join([full_symbol for num in xrange(nbr_full_symbols)])
-  s += ''.join([empty_symbol for num in xrange(number_items - count_symbols)])
+  s += ''.join([empty_symbol for num in xrange(count_symbols - nbr_full_symbols)])
   return s
 
 
