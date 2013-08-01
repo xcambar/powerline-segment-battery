@@ -21,8 +21,8 @@ And then add this to your prefered spot under `segments`:
 
 2 displays are available:
 
-* `numeric`: Displays the percentage of battery remaining with a `%` aside
-* `symbol`: Allows you to display a number of characters indicating visually the level of battery remaining.
+* `numeric`: Displays the percentage of battery remaining with a `%` aside ![Numeric style](./images/numeric.png)
+* `symbol`: Allows you to display a number of characters indicating visually the level of battery remaining ![With symbols](./images/symbols.png)
 
 See the file `xcambar/segment/battery.py` for the available options.
 
