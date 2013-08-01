@@ -13,7 +13,7 @@ def display_symbol(value, config):
   empty_symbol = config.get('empty_symbol', "♡ ")
   count_symbols = config.get('number_of_symbols', 5) #How many hearts must be shown
 
-  threshold = 100/max_hearts/2
+  threshold = 100/count_symbols/2
   nbr_full_symbols = int(min(threshold + int(value), 100) / int(100 / number_items))
 
   s = ''.join([full_symbol for num in xrange(nbr_full_symbols)])
