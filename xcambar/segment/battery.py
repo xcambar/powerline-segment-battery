@@ -8,31 +8,36 @@ from shlex import split
 import re
 
 
-def display_hearts(config):
-  full_heart = "♥ "
-  empty_heart = "♡ "
+def display_symbol(value, config):
+  full_symbol = config.get('full_symbol', '♥ ')
+  empty_symbol = config.get('empty_symbol', "♡ ")
+  count_symbols = config.get('number_of_symbols', 5) #How many hearts must be shown
 
-  s = ''.join([full_heart for num in xrange(nbr_full_hearts)])
-  s += ''.join([empty_heart for num in xrange(max_hearts - nbr_full_hearts)])
+  threshold = 100/max_hearts/2
+  nbr_full_symbols = int(min(threshold + int(value), 100) / int(100 / number_items))
+
+  s = ''.join([full_symbol for num in xrange(nbr_full_symbols)])
+  s += ''.join([empty_symbol for num in xrange(number_items - count_symbols)])
   return s
 
-@requires_segment_info
-def battery(pl, segment_info, display="hearts", config={}):
-  max_hearts = 5 #How many hearts must be shown
-  threshold = 100/max_hearts/2
 
+def display_numeric(value, config):
+  return ''.join([value, '%'])
+
+
+@requires_segment_info
+def battery(pl, segment_info, display="symbol", config={}):
   p1 = Popen(split("pmset -g ps"), stdout=PIPE)
   p2 = Popen(split(r'sed -n "s/.*[[:blank:]]+*\(.*%\).*/\1/p"'), stdin=p1.stdout, stdout=PIPE)
 
-  percentage = re.search('(\d{0,3})%', p2.stdout.read()).group(1)
-  nbr_full_hearts = int(min(threshold + int(percentage), 100) / int(100 / max_hearts))
+  value = re.search('(\d{0,3})%', p2.stdout.read()).group(1)
 
   try:
     output = {
-      'hearts': lambda: display_hearts(config)
+      'symbol': lambda: display_symbol(value, config)
     }[display]()
   except KeyError:
-    output = display_numeric(config)
+    output = display_numeric(value, config)
 
   return [{
     'contents': output,
