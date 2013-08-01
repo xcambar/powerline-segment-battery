@@ -29,10 +29,10 @@ def battery(pl, segment_info, display="hearts", config={}):
 
   try:
     output = {
-      'hearts': lambda: display_hearts(conf)
+      'hearts': lambda: display_hearts(config)
     }[display]()
   except KeyError:
-    output = display_numeric(conf)
+    output = display_numeric(config)
 
   return [{
     'contents': output,
