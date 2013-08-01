@@ -7,8 +7,17 @@ from subprocess import Popen, PIPE
 from shlex import split
 import re
 
+
+def display_hearts(config):
+  full_heart = "♥ "
+  empty_heart = "♡ "
+
+  s = ''.join([full_heart for num in xrange(nbr_full_hearts)])
+  s += ''.join([empty_heart for num in xrange(max_hearts - nbr_full_hearts)])
+  return s
+
 @requires_segment_info
-def battery(pl, segment_info):
+def battery(pl, segment_info, display="hearts", config={}):
   max_hearts = 5 #How many hearts must be shown
   threshold = 100/max_hearts/2
 
@@ -18,13 +27,14 @@ def battery(pl, segment_info):
   percentage = re.search('(\d{0,3})%', p2.stdout.read()).group(1)
   nbr_full_hearts = int(min(threshold + int(percentage), 100) / int(100 / max_hearts))
 
-  full_heart = "♥ "
-  empty_heart = "♡ "
-
-  s = ''.join([full_heart for num in xrange(nbr_full_hearts)])
-  s += ''.join([empty_heart for num in xrange(max_hearts - nbr_full_hearts)])
+  try:
+    output = {
+      'hearts': lambda: display_hearts(conf)
+    }[display]()
+  except KeyError:
+    output = display_numeric(conf)
 
   return [{
-    'contents': s,
+    'contents': output,
     'highlight_group': ['battery', 'system_load']
   }]
